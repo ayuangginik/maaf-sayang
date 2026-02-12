@@ -14,97 +14,68 @@
             margin: 0;
             background-color: #fce4ec; /* Pink Pastel */
             font-family: 'Poppins', sans-serif;
-            overflow: hidden; /* Mencegah scrollbar saat tombol lari */
-            position: relative; /* Untuk positioning karakter */
+            overflow: hidden;
+            flex-direction: column;
         }
-
         .container {
             text-align: center;
             background: white;
-            padding: 50px;
+            padding: 40px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            max-width: 450px;
+            max-width: 400px;
             width: 90%;
             position: relative;
             z-index: 10;
         }
-
-        h1 {
-            color: #e91e63; /* Merah muda cerah */
-            margin-bottom: 15px;
-            font-size: 32px;
-            font-weight: bold;
+        h1 { color: #e91e63; margin-bottom: 10px; font-size: 26px; }
+        p { color: #555; margin-bottom: 30px; font-size: 16px; }
+        
+        /* Styling untuk GIF agar besar dan di tengah */
+        .character {
+            width: 180px; /* Ukuran gambar diperbesar */
+            height: auto;
+            margin-bottom: 20px; /* Jarak ke teks */
         }
-
-        p {
-            color: #555;
-            margin-bottom: 30px;
-            font-size: 18px;
-            line-height: 1.5;
-        }
-
+        
         .buttons {
             display: flex;
             gap: 20px;
             justify-content: center;
-            align-items: center;
-            min-height: 50px;
+            margin-top: 20px;
             position: relative;
+            height: 50px; /* Ruang untuk tombol No bergerak */
         }
-
         button {
             padding: 12px 24px;
             font-size: 16px;
             cursor: pointer;
             border: none;
             border-radius: 25px;
-            transition: all 0.2s;
             font-weight: bold;
-            z-index: 10; /* Pastikan tombol di atas karakter */
+            transition: all 0.2s;
+            position: absolute; /* Penting untuk tombol No */
         }
-
-        #yesBtn {
-            background-color: #4CAF50; /* Hijau */
-            color: white;
-        }
-
-        #noBtn {
-            background-color: #ffcccb; /* Merah muda */
-            color: #d32f2f;
-            position: absolute; /* Penting untuk tombol lari */
-            transition: all 0.3s ease; /* Biar larinya mulus */
-            z-index: 10; /* Pastikan tombol di atas karakter */
-        }
-
-        button:hover {
-            transform: scale(1.1);
-        }
-
-        /* Styling untuk Karakter GIF */
-        #character {
-            width: 150px; /* Ukuran gambar */
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1; /* Di bawah konten utama */
-            pointer-events: none; /* Agar tidak menghalangi event tombol */
-        }
+        #yesBtn { background-color: #4CAF50; color: white; position: relative; }
+        #noBtn { background-color: #ffcccb; color: #d32f2f; }
+        
+        button:hover { transform: scale(1.1); }
     </style>
 </head>
 <body>
     <audio id="bgMusic" src="beabadoobee_Glue_Song.mp3" loop></audio>
 
     <div class="container">
+        <img src="https://media.tenor.com/KGnViErYaD8AAAAi/abra%C3%A7ourso.gif" id="character" class="character" alt="Cute Character">
+        
         <h1>Will you be my Valentine? ❤️</h1>
         <p>I know I was wrong. Can we please make up and be fine again? 🥺</p>
+        
         <div class="buttons">
-            <button id="yesBtn">Yes!</button>
-            <button id="noBtn">No</button>
+            <button id="yesBtn" style="left: -60px;">Yes!</button>
+            <button id="noBtn" style="right: -60px;">No</button>
         </div>
     </div>
-    
-    <img src="https://media.tenor.com/KGnViErYaD8AAAAi/abra%C3%A7ourso.gif" id="character" class="character" alt="Cute Character">
 
     <script>
         const yesBtn = document.getElementById('yesBtn');
@@ -114,36 +85,27 @@
 
         // Fungsi saat tombol YES diklik
         yesBtn.addEventListener('click', () => {
-            // Aktifkan konfeti
-            confetti({
-                particleCount: 200,
-                spread: 120,
-                origin: { y: 0.6 },
-                colors: ['#e91e63', '#ffffff', '#4CAF50']
-            });
+            confetti({ particleCount: 200, spread: 120, colors: ['#e91e63', '#ffffff', '#4CAF50'] });
             
-            // Ganti GIF ke mode Happy/Party
+            // Ganti ke GIF Happy
             character.src = "https://media.tenor.com/af05gjYorTUAAAAi/milk-and-mocha.gif";
             
-            // Putar musik (jika belum main)
-            bgMusic.play().catch(e => console.log("Music play blocked by browser:", e));
-
             alert("Yay! Let's be happy again!");
         });
 
-        // Fungsi saat tombol NO didekati kursor (Menghindar lincah)
+        // Fungsi saat tombol NO didekati
         noBtn.addEventListener('mouseover', () => {
-            // Putar musik saat kursor mendekati tombol No
-            bgMusic.play().catch(e => console.log("Music play blocked by browser:", e));
+            // Mainkan musik saat kursor mendekati tombol No
+            bgMusic.play().catch(e => console.log("Music play blocked:", e));
 
-            // Tombol No menghindar ke posisi acak dalam layar
+            // Tombol No menghindar
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
             const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
             
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
             
-            // Ganti GIF ke mode Menangis
+            // Ganti GIF ke menangis
             character.src = "https://media.tenor.com/HRrdbtK69McAAAAi/an-%E1%BB%A7i.gif";
         });
     </script>
