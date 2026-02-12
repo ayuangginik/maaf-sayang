@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will you be my Valentine?</title>
+    <title>Please Forgive Me</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         body {
@@ -71,14 +71,14 @@
     <audio id="bgMusic" src="beabadoobee_Glue_Song.mp3" loop autoplay></audio>
 
     <div class="container">
-        <img src="https://media.tenor.com/KGnViErYaD8AAAAi/abra%C3%A7ourso.gif" id="character" class="character" alt="Cute Character">
+        <img src="https://media1.tenor.com/m/iLC-_u_3rJsAAAAd/milk-and-mocha-milk-and-mocha-hug.gif" id="character" class="character" alt="Cute Character">
         
-        <h1>Will you be my Valentine? ❤️</h1>
-        <p>I know I was wrong. Can we please make up and be fine again? 🥺</p>
+        <h1>Maafin aku ya? ❤️</h1>
+        <p>Aku tahu aku salah. Kamu mau kan maafin aku dan kita baikkan lagi? 🥺</p>
         
         <div class="buttons">
-            <button id="yesBtn" style="left: -60px;">Yes!</button>
-            <button id="noBtn" style="right: -60px;">No</button>
+            <button id="yesBtn" style="left: -60px;">Iya, aku maafin!</button>
+            <button id="noBtn" style="right: -60px;">Enggak</button>
         </div>
     </div>
 
@@ -88,7 +88,7 @@
         const character = document.getElementById('character');
         const bgMusic = document.getElementById('bgMusic');
 
-        // Mencoba memutar musik saat halaman pertama kali diklik/diinteraksi
+        // Mencoba memutar musik saat halaman pertama kali diklik
         document.body.addEventListener('click', () => {
             bgMusic.play().catch(e => console.log("Music play blocked", e));
         }, { once: true });
@@ -100,7 +100,12 @@
             // Ganti ke GIF Happy
             character.src = "https://media.tenor.com/af05gjYorTUAAAAi/milk-and-mocha.gif";
             
-            alert("Yay! Let's be happy again!");
+            // Ganti teks
+            document.querySelector('h1').innerText = "Yay! Makasih ya sayang! 🥰";
+            document.querySelector('p').innerText = "Aku janji ga bakal ulangi lagi!";
+            
+            // Sembunyikan tombol
+            document.querySelector('.buttons').style.display = 'none';
         });
 
         // Fungsi saat tombol NO didekati
