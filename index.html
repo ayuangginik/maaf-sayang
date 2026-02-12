@@ -31,8 +31,8 @@
             flex-direction: column;
             align-items: center; /* Memastikan semua elemen tengah */
         }
-        h1 { color: #e91e63; margin-bottom: 10px; font-size: 26px; }
-        p { color: #555; margin-bottom: 30px; font-size: 16px; }
+        h1 { color: #e91e63; margin-bottom: 10px; font-size: 24px; }
+        p { color: #555; margin-bottom: 30px; font-size: 16px; line-height: 1.5; }
         
         /* Styling untuk GIF agar besar dan di tengah */
         .character {
@@ -73,12 +73,12 @@
     <div class="container">
         <img src="https://media1.tenor.com/m/iLC-_u_3rJsAAAAd/milk-and-mocha-milk-and-mocha-hug.gif" id="character" class="character" alt="Cute Character">
         
-        <h1>Maafin aku ya? ❤️</h1>
-        <p>Aku tahu aku salah. Kamu mau kan maafin aku dan kita baikkan lagi? 🥺</p>
+        <h1 id="title">I'm sorry, okay? ❤️<br>나랑 화해해주라!</h1>
+        <p id="text">I know I was wrong. Let's be fine again?<br>내가 잘못했어. 다시 잘 지내자? 🥺</p>
         
         <div class="buttons">
-            <button id="yesBtn" style="left: -60px;">Iya, aku maafin!</button>
-            <button id="noBtn" style="right: -60px;">Enggak</button>
+            <button id="yesBtn" style="left: -60px;">Yes! <br>응!</button>
+            <button id="noBtn" style="right: -60px;">No<br>싫어</button>
         </div>
     </div>
 
@@ -87,6 +87,8 @@
         const noBtn = document.getElementById('noBtn');
         const character = document.getElementById('character');
         const bgMusic = document.getElementById('bgMusic');
+        const title = document.getElementById('title');
+        const text = document.getElementById('text');
 
         // Mencoba memutar musik saat halaman pertama kali diklik
         document.body.addEventListener('click', () => {
@@ -97,12 +99,12 @@
         yesBtn.addEventListener('click', () => {
             confetti({ particleCount: 200, spread: 120, colors: ['#e91e63', '#ffffff', '#4CAF50'] });
             
-            // Ganti ke GIF Happy
+            // Ganti ke GIF Kiss (Cium)
             character.src = "https://media.tenor.com/af05gjYorTUAAAAi/milk-and-mocha.gif";
             
-            // Ganti teks
-            document.querySelector('h1').innerText = "Yay! Makasih ya sayang! 🥰";
-            document.querySelector('p').innerText = "Aku janji ga bakal ulangi lagi!";
+            // Ganti teks jadi santai
+            title.innerHTML = "Yay! Thank you!<br>고마워! 사랑해! 🥰";
+            text.innerHTML = "I promise to be better!<br>약속할게!";
             
             // Sembunyikan tombol
             document.querySelector('.buttons').style.display = 'none';
